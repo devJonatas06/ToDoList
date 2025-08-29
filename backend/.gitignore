@@ -1,33 +1,113 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# 🔒 ARQUIVOS SENSÍVEOS - NUNCA SUBIR PARA GIT!
+# ===============================================
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Arquivos de configuração com credenciais
+**/application.properties
+**/application-*.properties
+**/*.env
+**/.env.*
+**/environment.*.ts
+**/config/**.json
+**/keys/
+**/keystore.jks
+**/*.p12
+**/*.pfx
+**/credentials.json
+**/firebase-key.json
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+# Arquivos de IDE
+# ===============
+**/.idea/
+**/*.iml
+**/.project
+**/.classpath
+**/.settings/
+**/.vscode/
+**/.vs/
+**/nbproject/
+**/build/
+**/out/
+**/target/
+**/bin/
+**/dist/
+**/node_modules/
+**/.angular/
+**/.gradle/
+**/.nb-gradle/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Logs e arquivos temporários
+# ===========================
+**/*.log
+**/logs/
+**/.metadata/
+**/tmp/
+**/temp/
+**/*.tmp
+**/*.temp
 
-### VS Code ###
-.vscode/
+# Sistema operacional
+# ===================
+**/.DS_Store
+**/Thumbs.db
+**/desktop.ini
+
+# Docker e desenvolvimento
+# ========================
+**/docker-compose.override.yml
+**/.docker/
+**/docker-data/
+**/volumes/
+
+# Backend Java específico
+# =======================
+**/maven-wrapper.jar
+**/.mvn/wrapper/maven-wrapper.jar
+**/HELP.md
+**/mvnw
+**/mvnw.cmd
+**/gradlew
+**/gradlew.bat
+**/.springBeans
+
+# Frontend Angular específico
+# ===========================
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/coverage/
+**/.nyc_output
+**/.lighthouseci/
+**/www/
+**/webapps/
+
+# Banco de dados local
+# ====================
+**/*.db
+**/*.sqlite
+**/*.h2.db
+**/data/
+**/database/
+
+# Arquivos compilados
+# ===================
+**/*.class
+**/*.jar
+**/*.war
+**/*.ear
+**/*.zip
+**/*.tar.gz
+
+# Editor de texto
+# ===============
+**/*.swp
+**/*.swo
+**/*.sublime-*
+
+# Miscelânea
+# ==========
+**/.sonar/
+**/sonar-project.properties
+**/dependency-reduced-pom.xml
+**/build.log
+**/dump.rdb
+**/.attach_pid*
