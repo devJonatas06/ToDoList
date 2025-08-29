@@ -5,8 +5,10 @@
 # Arquivos de configuração com credenciais
 **/application.properties
 **/application-*.properties
-**/*.env
-**/.env.*
+# Environment variables
+.env
+*.env
+!*.env.example
 **/environment.*.ts
 **/config/**.json
 **/keys/
@@ -54,7 +56,7 @@
 
 # Docker e desenvolvimento
 # ========================
-**/docker-compose.override.yml
+**/docker-compose.yml
 **/.docker/
 **/docker-data/
 **/volumes/

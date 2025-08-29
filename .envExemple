@@ -1,0 +1,11 @@
+# .env.example
+POSTGRES_DB=todolist_db
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=sua_senha_postgres_aqui
+
+SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/todolist_db
+SPRING_DATASOURCE_USERNAME=postgres
+SPRING_DATASOURCE_PASSWORD=sua_senha_postgres_aqui
+
+API_SECURITY_TOKEN_SECRET=sua_chave_secreta_super_longa_aqui
+CORS_ALLOWED_ORIGINS=http://localhost:4200,http://front-end:80
