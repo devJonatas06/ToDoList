@@ -52,8 +52,6 @@ public class TokenService {
                     .withIssuer("login-auth-api")
                     .build()
                     .verify(token);
-
-            // Verifica adicionalmente se o token não expirou
             return !decodedJWT.getExpiresAt().before(new Date());
         } catch (JWTVerificationException exp) {
             return false;
