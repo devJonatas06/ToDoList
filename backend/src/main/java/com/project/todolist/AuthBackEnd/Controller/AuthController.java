@@ -7,8 +7,6 @@ import com.project.todolist.AuthBackEnd.dto.ResponseDto;
 import com.project.todolist.AuthBackEnd.infra.security.TokenService;
 import com.project.todolist.AuthBackEnd.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -70,16 +68,11 @@ public class AuthController {
 
             String token = authHeader.replace("Bearer ", "");
             boolean isValid = tokenService.isValidToken(token);
-
-            if (isValid) {
-                return ResponseEntity.ok().build();
-
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
-            }
+            return ResponseEntity.ok(isValid);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.ok(false);
         }
     }
 }
+
+
