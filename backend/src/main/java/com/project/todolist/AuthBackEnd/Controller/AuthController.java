@@ -9,11 +9,10 @@ import com.project.todolist.AuthBackEnd.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -23,13 +22,22 @@ public class AuthController {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
-//teste
+
+    //teste
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDto body) {
-        User user = this.repository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = this.repository.findByEmail(body.email())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
         if (passwordEncoder.matches(body.password(), user.getPassword())) {
             String token = this.tokenService.genareteToken(user);
-            return ResponseEntity.ok(new ResponseDto(user.getName(), token));
+
+            // Retorne um objeto com token e redirecionamento seguro
+            Map<String, String> response = new HashMap<>();
+            response.put("token", token);
+            response.put("redirectUrl", "http://localhost:4201");
+
+            return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.badRequest().build();
         }
@@ -48,6 +56,21 @@ public class AuthController {
             return ResponseEntity.ok(new ResponseDto(newUser.getName(), token));
         } else {
             return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/validate")
+    public ResponseEntity<Boolean> validateToken(@RequestHeader("Authorization") String authHeader) {
+        try {
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                return ResponseEntity.ok(false);
+            }
+
+            String token = authHeader.replace("Bearer ", "");
+            boolean isValid = tokenService.isValidToken(token);
+            return ResponseEntity.ok(isValid);
+        } catch (Exception e) {
+            return ResponseEntity.ok(false);
         }
     }
 }
