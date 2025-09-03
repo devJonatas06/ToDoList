@@ -35,20 +35,6 @@ services:
       - todolist-network
     restart: unless-stopped
 
-  # Front-end Angular
-  front-end:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: todolist-frontend
-    ports:
-      - "4200:80"
-    depends_on:
-      - back-end
-    networks:
-      - todolist-network
-    restart: unless-stopped
-
 volumes:
   postgres_data:
 
