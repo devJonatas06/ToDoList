@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # Banco de dados PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    container_name: todolist-db
+    environment:
+      POSTGRES_DB: todolist_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 28082023
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - todolist-network
+
+  # Back-end Spring Boot
+  back-end:
+    build: ./backend
+    container_name: todolist-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/todolist_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 28082023
+      API_SECURITY_TOKEN_SECRET: 28082023
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+    depends_on:
+      - postgres
+    networks:
+      - todolist-network
+    restart: unless-stopped
+
+  # Front-end Angular
+  front-end:
+    build:
+      context: .               # ✅ Contexto: pasta raiz
+      dockerfile: Dockerfile   # ✅ Dockerfile na raiz
+    container_name: login-todolist-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - back-end
+    networks:
+      - todolist-network
+    restart: unless-stopped
+
+
+
+volumes:
+  postgres_data:
+
+networks:
+  todolist-network:
+    driver: bridge

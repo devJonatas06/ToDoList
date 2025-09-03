@@ -32,11 +32,8 @@ public class AuthController {
         if (passwordEncoder.matches(body.password(), user.getPassword())) {
             String token = this.tokenService.genareteToken(user);
 
-            // Retorne um objeto com token e redirecionamento seguro
             Map<String, String> response = new HashMap<>();
             response.put("token", token);
-            response.put("redirectUrl", "http://localhost:4201");
-
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.badRequest().build();
