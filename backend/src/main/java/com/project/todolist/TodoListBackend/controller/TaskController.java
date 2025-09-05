@@ -6,6 +6,7 @@ import com.project.todolist.TodoListBackend.dto.TaskDTO;
 import com.project.todolist.TodoListBackend.dto.TaskMapper;
 import com.project.todolist.TodoListBackend.dto.TaskRequestDTO;
 import com.project.todolist.TodoListBackend.entity.Label;
+import com.project.todolist.TodoListBackend.entity.Priority;
 import com.project.todolist.TodoListBackend.entity.Task;
 import com.project.todolist.TodoListBackend.repository.LabelRepository;
 import com.project.todolist.TodoListBackend.repository.taskRepository;
@@ -40,6 +41,7 @@ public class TaskController {
                 .toList();
     }
 
+
     @PostMapping
 
     public TaskDTO createTask(@AuthenticationPrincipal UserPrincipal principal,
@@ -72,6 +74,19 @@ public class TaskController {
     @DeleteMapping("/{id}")
     public void deleteTask(@AuthenticationPrincipal UserPrincipal principal, @PathVariable Long id) {
         taskService.deleteTask(principal.getUser(), id);
+    }
+
+    @GetMapping("/labels/{labelId}")
+    public List<TaskDTO> getByLabel(@PathVariable Long labelId) {
+        return taskService.findByLabel(labelId).stream()
+                .map(TaskMapper::toDTO)
+                .toList();
+    }
+    @GetMapping("/priority/{priority}")
+    public List<TaskDTO> getByPriority(@PathVariable Priority priority) {
+        return taskService.findByPriority(priority).stream()
+                .map(TaskMapper::toDTO)
+                .toList();
     }
 
 

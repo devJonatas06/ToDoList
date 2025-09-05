@@ -43,6 +43,7 @@ public class TaskService {
             throw new RuntimeException("Cannot delete task of another user");
         }
     }
+
     public Page<Task> getAllTasks(Pageable pageable) {
         return taskRepository.findAll(pageable);
     }
@@ -86,6 +87,12 @@ public class TaskService {
         }
 
         return task;
+    }
+    public List<Task> findByLabel(Long labelId) {
+        return taskRepository.findByLabels_Id(labelId);
+    }
+    public List<Task> findByPriority(Priority priority) {
+        return taskRepository.findByPriority(priority);
     }
 
 }
