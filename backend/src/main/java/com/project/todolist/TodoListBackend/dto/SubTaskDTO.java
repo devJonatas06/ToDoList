@@ -1,0 +1,14 @@
+package com.project.todolist.TodoListBackend.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class SubTaskDTO {
+    private Long id;
+    private String title;
+    private boolean completed;
+}

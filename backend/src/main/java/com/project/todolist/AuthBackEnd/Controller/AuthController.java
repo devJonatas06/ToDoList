@@ -6,6 +6,7 @@ import com.project.todolist.AuthBackEnd.dto.RegisterRequestDto;
 import com.project.todolist.AuthBackEnd.dto.ResponseDto;
 import com.project.todolist.AuthBackEnd.infra.security.TokenService;
 import com.project.todolist.AuthBackEnd.repository.UserRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +26,7 @@ public class AuthController {
 
     //teste
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody LoginRequestDto body) {
+    public ResponseEntity login(@Valid @RequestBody LoginRequestDto body) {
         User user = this.repository.findByEmail(body.email())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -41,13 +42,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegisterRequestDto body) {
+    public ResponseEntity register(@Valid @RequestBody RegisterRequestDto body) {
         Optional<User> user = this.repository.findByEmail(body.email());
         if (user.isEmpty()) {
             User newUser = new User();
-            newUser.setPassword(passwordEncoder.encode(body.password()));
             newUser.setEmail(body.email());
             newUser.setName(body.name());
+            newUser.setPassword(passwordEncoder.encode(body.password()));
             this.repository.save(newUser);
             String token = this.tokenService.genareteToken(newUser);
             return ResponseEntity.ok(new ResponseDto(newUser.getName(), token));
@@ -63,7 +64,7 @@ public class AuthController {
                 return ResponseEntity.ok(false);
             }
 
-            String token = authHeader.replace("Bearer ", "");
+            String token = authHeader.replace("Bearer ", "").trim();
             boolean isValid = tokenService.isValidToken(token);
             return ResponseEntity.ok(isValid);
         } catch (Exception e) {

@@ -32,29 +32,25 @@ public class TokenService {
             throw new RuntimeException("Error while authenticating");
         }
     }
-    public String validadeToken(String token){
-        try{
+    public String getSubject(String token){
+        DecodedJWT decoded = verifyToken(token);
+        return decoded != null ? decoded.getSubject() : null;
+    }
+
+    public boolean isValidToken(String token){
+        DecodedJWT decoded = verifyToken(token);
+        return decoded != null && !decoded.getExpiresAt().before(new Date());
+    }
+
+    private DecodedJWT verifyToken(String token){
+        try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
                     .withIssuer("login-auth-api")
                     .build()
-                    .verify(token)
-                    .getSubject();
-
-        }catch (JWTVerificationException exp){
-            return null;
-        }
-    }
-    public boolean isValidToken(String token) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-            DecodedJWT decodedJWT = JWT.require(algorithm)
-                    .withIssuer("login-auth-api")
-                    .build()
                     .verify(token);
-            return !decodedJWT.getExpiresAt().before(new Date());
-        } catch (JWTVerificationException exp) {
-            return false;
+        } catch (JWTVerificationException e){
+            return null;
         }
     }
 

@@ -28,7 +28,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String token = recoverToken(request);
-        String email = tokenService.validadeToken(token);
+        String email = tokenService.getSubject(token);
 
         if (email != null) {
             User user = userRepository.findByEmail(email)
@@ -41,7 +41,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
-    }
+}
 
     private String recoverToken(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
