@@ -71,7 +71,7 @@ public class TaskController {
                 .map(TaskMapper::toDTO);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteTask(@AuthenticationPrincipal UserPrincipal principal, @PathVariable Long id) {
         taskService.deleteTask(principal.getUser(), id);
     }

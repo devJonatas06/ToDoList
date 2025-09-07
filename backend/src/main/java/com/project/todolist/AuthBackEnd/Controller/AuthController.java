@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -51,7 +52,7 @@ public class AuthController {
             newUser.setPassword(passwordEncoder.encode(body.password()));
             this.repository.save(newUser);
             String token = this.tokenService.genareteToken(newUser);
-            return ResponseEntity.ok(new ResponseDto(newUser.getName(), token));
+            return ResponseEntity.ok(new ResponseDto(newUser.getId(), newUser.getName(), token));
         } else {
             return ResponseEntity.badRequest().build();
         }

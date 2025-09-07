@@ -1,4 +1,5 @@
 package com.project.todolist.AuthBackEnd.dto;
 
-public record ResponseDto(String name, String token) {
+public record ResponseDto(Long id,String name, String token) {
+
 }

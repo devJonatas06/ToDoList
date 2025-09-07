@@ -55,7 +55,7 @@ public class AuthControllerTest {
         repository.save(newUser);
 
         String token = tokenService.genareteToken(newUser);
-        return ResponseEntity.ok(new ResponseDto(newUser.getName(), token));
+        return ResponseEntity.ok(new ResponseDto(newUser.getId(), newUser.getName(), token));
     }
 
     @GetMapping("/validate")

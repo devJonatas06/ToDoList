@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,7 @@ public class TaskService {
     public void deleteTask(User user, Long taskId) {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
-        if(task.getUser().getId().equals(user.getId())){
+        if (Objects.equals(task.getUser().getId(), user.getId())) {
             taskRepository.delete(task);
         } else {
             throw new RuntimeException("Cannot delete task of another user");
