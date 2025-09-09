@@ -1,6 +1,7 @@
 package com.project.todolist.TodoListBackend.service;
 
 import com.project.todolist.AuthBackEnd.Domain.User;
+import com.project.todolist.TodoListBackend.dto.LabelDTO;
 import com.project.todolist.TodoListBackend.dto.TaskRequestDTO;
 import com.project.todolist.TodoListBackend.entity.Label;
 import com.project.todolist.TodoListBackend.entity.Priority;
@@ -42,6 +43,15 @@ public class TaskService {
             taskRepository.delete(task);
         } else {
             throw new RuntimeException("Cannot delete task of another user");
+        }
+    }
+    public void deleteLabel(LabelDTO labelDTO, Long id) {
+        Label label = labelRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Label not found"));
+        if (Objects.equals(label.getName(), label.getId())) {
+            labelRepository.delete(label);
+        } else {
+            throw new RuntimeException("Cannot delete label or not exist");
         }
     }
 
