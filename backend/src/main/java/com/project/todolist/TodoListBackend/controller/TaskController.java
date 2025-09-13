@@ -7,6 +7,7 @@ import com.project.todolist.TodoListBackend.dto.TaskMapper;
 import com.project.todolist.TodoListBackend.dto.TaskRequestDTO;
 import com.project.todolist.TodoListBackend.entity.Label;
 import com.project.todolist.TodoListBackend.entity.Priority;
+import com.project.todolist.TodoListBackend.entity.Status;
 import com.project.todolist.TodoListBackend.entity.Task;
 import com.project.todolist.TodoListBackend.repository.LabelRepository;
 import com.project.todolist.TodoListBackend.repository.taskRepository;
@@ -22,6 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/tasks")
@@ -85,6 +87,13 @@ public class TaskController {
     @GetMapping("/priority/{priority}")
     public List<TaskDTO> getByPriority(@PathVariable Priority priority) {
         return taskService.findByPriority(priority).stream()
+                .map(TaskMapper::toDTO)
+                .toList();
+    }
+
+    @GetMapping("/status/{TaskStatus}")
+    public List<TaskDTO>getByStatus(@PathVariable Status TaskStatus){
+        return taskService.findByCompleted(TaskStatus).stream()
                 .map(TaskMapper::toDTO)
                 .toList();
     }

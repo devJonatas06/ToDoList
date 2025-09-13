@@ -1,6 +1,7 @@
 package com.project.todolist.TodoListBackend.dto;
 
 import com.project.todolist.TodoListBackend.entity.Priority;
+import com.project.todolist.TodoListBackend.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ public class TaskRequestDTO {
     private String title;
     private String description;
     private Priority priority;
-    private boolean completed;
+    private Status status;
     private LocalDateTime dateTime;
     private List<SubTaskDTO> subtasks;
     private Set<Long> labelIds; // apenas IDs das labels já existentes

@@ -1,6 +1,7 @@
 package com.project.todolist.TodoListBackend.dto;
 
 import com.project.todolist.TodoListBackend.entity.Priority;
+import com.project.todolist.TodoListBackend.entity.Status;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class TaskDTO {
     private String title;
     private String description;
     private Priority priority;
-    private boolean completed;
+    private Status status;
     private LocalDateTime duration;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

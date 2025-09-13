@@ -3,10 +3,7 @@ package com.project.todolist.TodoListBackend.service;
 import com.project.todolist.AuthBackEnd.Domain.User;
 import com.project.todolist.TodoListBackend.dto.LabelDTO;
 import com.project.todolist.TodoListBackend.dto.TaskRequestDTO;
-import com.project.todolist.TodoListBackend.entity.Label;
-import com.project.todolist.TodoListBackend.entity.Priority;
-import com.project.todolist.TodoListBackend.entity.SubTask;
-import com.project.todolist.TodoListBackend.entity.Task;
+import com.project.todolist.TodoListBackend.entity.*;
 import com.project.todolist.TodoListBackend.repository.LabelRepository;
 import com.project.todolist.TodoListBackend.repository.taskRepository;
 import jakarta.persistence.EnumType;
@@ -79,7 +76,7 @@ public class TaskService {
         task.setTitle(dto.getTitle());
         task.setDescription(dto.getDescription());
         task.setPriority(dto.getPriority());
-        task.setCompleted(dto.isCompleted());
+        task.setStatus(dto.getStatus());
         task.setUser(user);
 
         if (dto.getSubtasks() != null) {
@@ -102,8 +99,13 @@ public class TaskService {
     public List<Task> findByLabel(Long labelId) {
         return taskRepository.findByLabels_Id(labelId);
     }
+
     public List<Task> findByPriority(Priority priority) {
         return taskRepository.findByPriority(priority);
+    }
+
+    public List<Task> findByCompleted(Status TaskStatus) {
+        return taskRepository.findByStatus(TaskStatus);
     }
 
 }

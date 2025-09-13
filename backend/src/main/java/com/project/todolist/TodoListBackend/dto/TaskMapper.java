@@ -22,7 +22,7 @@ public class TaskMapper {
                 task.getTitle(),
                 task.getDescription(),
                 task.getPriority(),
-                task.isCompleted(),
+                task.getStatus(),
                 task.getDueDate(),
                 task.getCreatedAt(),
                 task.getUpdatedAt(),

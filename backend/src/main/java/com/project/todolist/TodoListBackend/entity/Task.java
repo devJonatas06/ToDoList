@@ -36,7 +36,9 @@ public class Task {
     private Priority priority;
 
 
-    private boolean completed;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
 
     @Column(name = "due_date")
     private LocalDateTime dueDate;
@@ -49,7 +51,6 @@ public class Task {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
 
 
     @ManyToMany
