@@ -8,6 +8,7 @@ import com.project.todolist.AuthBackEnd.infra.security.TokenService;
 import com.project.todolist.AuthBackEnd.repository.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@Profile("test")  // ← Adicione esta anotação
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthControllerTest {
