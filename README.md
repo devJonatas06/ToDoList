@@ -222,8 +222,9 @@ Password: sua_senha_postgres_aqui
 ## 9. Deploy na AWS EC2
 
 Este backend foi implantado em uma instância AWS EC2 (Free Tier, t2.micro) com Docker e Docker Compose.
-![img.png](img.png)
-![img_1.png](img_1.png)
+<img width="1619" height="501" alt="image" src="https://github.com/user-attachments/assets/b3d8c4de-db38-4c46-b89b-7ed0f5c9cbf4" />
+<img width="1102" height="501" alt="image" src="https://github.com/user-attachments/assets/c525d5c4-3202-44dd-a112-1138c99e1497" />
+
 
 
 # 8. Notas
