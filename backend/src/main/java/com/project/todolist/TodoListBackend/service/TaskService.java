@@ -5,10 +5,7 @@ import com.project.todolist.TodoListBackend.dto.LabelDTO;
 import com.project.todolist.TodoListBackend.dto.TaskRequestDTO;
 import com.project.todolist.TodoListBackend.entity.*;
 import com.project.todolist.TodoListBackend.repository.LabelRepository;
-import com.project.todolist.TodoListBackend.repository.taskRepository;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import lombok.NoArgsConstructor;
+import com.project.todolist.TodoListBackend.repository.TaskRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,10 +18,10 @@ import java.util.stream.Collectors;
 @Service
 public class TaskService {
 
-    private final taskRepository taskRepository;
+    private final TaskRepository taskRepository;
     private final LabelRepository labelRepository;
 
-    public TaskService(taskRepository taskRepository, LabelRepository labelRepository) {
+    public TaskService(TaskRepository taskRepository, LabelRepository labelRepository) {
         this.taskRepository = taskRepository;
         this.labelRepository = labelRepository;
     }

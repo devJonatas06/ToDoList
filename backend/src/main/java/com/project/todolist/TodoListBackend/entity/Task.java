@@ -13,11 +13,12 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name = "tasks")
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tasks")
 public class Task {
 
     @Id
