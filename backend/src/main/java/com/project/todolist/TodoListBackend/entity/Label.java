@@ -17,7 +17,7 @@ public class Label {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String name; // Ex: "Trabalho", "Estudos", "Pessoal"
+    private String name;
 
     @ManyToMany(mappedBy = "labels")
     private Set<Task> tasks = new HashSet<>();
